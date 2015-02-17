@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import ke.co.example.weaversoft.crbclients.R;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
 
 /**

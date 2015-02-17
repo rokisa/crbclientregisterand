@@ -31,6 +31,7 @@ public class ClientDetails {
     }
 
     public void setNationalId(String nationalId) {
+
         this.nationalId = nationalId;
     }
 

@@ -8,18 +8,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-import ke.co.example.weaversoft.crbclients.R;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends ListActivity {
 
     TextView clientName;
     ProgressBar pb;
-    List<ClientDetails> ClientDetails;
+    List<ClientDetails> clientDetailsList;
+    public static final String ENDPOINT
+            ="http://localhost:9000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class MainActivity extends ListActivity {
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setVisibility(View.INVISIBLE);
+        requestData();
     }
 
     @Override
@@ -61,14 +68,49 @@ public class MainActivity extends ListActivity {
 
         getAddClientScreen.putExtra("ClientId", "NONE");
         startActivityForResult(getAddClientScreen, result);
+    }
 
+    private void requestData(){
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .build();
+        ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
+
+        api.fetchClientList(new Callback<List<ClientDetails>>() {
+            @Override
+            public void success(List<ClientDetails> clientDetails, Response response) {
+                clientDetailsList = clientDetails;
+                updateScreen();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                reportClientFetchError();
+            }
+        });
+    }
+
+    private void reportClientFetchError() {
+        Toast.makeText(this, "Error occurred while fetching data", Toast.LENGTH_LONG).show();
+    }
+
+    public void updateScreen(){
+        ClientAdapter clientAdapter = new ClientAdapter(this, R.layout.item_client, clientDetailsList);
+        setListAdapter(clientAdapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //Todo Add code after Adding a new User
+        Intent returningIntent = getIntent();
 
+        String status = returningIntent.getExtras().getString("status");
+
+        if(status.equals("SUCCESS")){
+            updateScreen();
+        }else if(status.equals("ERROR")){
+            Toast.makeText(this, "Client Creation Failed", Toast.LENGTH_LONG).show();
+        }
     }
 }
