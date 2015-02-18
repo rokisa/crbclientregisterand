@@ -14,7 +14,7 @@ public class ClientDetails {
     private String phoneNumber;
     private String nationality;
     private String physicalAddress;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String occupation;
     private String nationalIdPhoto;
 
@@ -83,11 +83,11 @@ public class ClientDetails {
         this.physicalAddress = physicalAddress;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

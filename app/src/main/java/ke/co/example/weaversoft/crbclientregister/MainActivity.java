@@ -2,6 +2,7 @@ package ke.co.example.weaversoft.crbclientregister;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,10 +23,11 @@ import retrofit.client.Response;
 public class MainActivity extends ListActivity {
 
     TextView clientName;
+    TextView statusTv;
     ProgressBar pb;
     List<ClientDetails> clientDetailsList;
     public static final String ENDPOINT
-            ="http://localhost:9000/";
+            ="http://10.0.2.2:9000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,9 @@ public class MainActivity extends ListActivity {
     }
 
     private void requestData(){
+//        //result = httpManager.getData("http://localhost:9000/clientrec/list");
+//        result = httpManager.getData("http://services.hanselandpetal.com/feeds/flowers.xml");
+
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
@@ -85,6 +90,8 @@ public class MainActivity extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
+                statusTv = (TextView) findViewById(R.id.statusTextView);
+                statusTv.setText(error.toString());
                 reportClientFetchError();
             }
         });
@@ -103,14 +110,18 @@ public class MainActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent returningIntent = getIntent();
+        Intent returningIntent = data;
 
         String status = returningIntent.getExtras().getString("status");
 
-        if(status.equals("SUCCESS")){
-            updateScreen();
-        }else if(status.equals("ERROR")){
+        statusTv = (TextView) findViewById(R.id.statusTextView);
+        statusTv.setText(status);
+
+        if(status.equals("ERROR")){
             Toast.makeText(this, "Client Creation Failed", Toast.LENGTH_LONG).show();
+        } else {
+            requestData();
+            Toast.makeText(this, "Client Created Successfully", Toast.LENGTH_LONG).show();
         }
     }
 }

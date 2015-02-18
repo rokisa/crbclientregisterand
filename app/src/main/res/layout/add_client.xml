@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etFirstName"
-        android:text="First Name"
         android:layout_alignTop="@+id/textView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="First Name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         android:layout_below="@+id/etFirstName"
         android:layout_alignLeft="@+id/etFirstName"
         android:layout_alignStart="@+id/etFirstName"
-        android:text="Last Name" />
+        android:hint="Last Name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         android:layout_below="@+id/etLastName"
         android:layout_alignLeft="@+id/etLastName"
         android:layout_alignStart="@+id/etLastName"
-        android:text="Nationality" />
+        android:hint="Nationality" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         android:layout_below="@+id/etNationality"
         android:layout_alignLeft="@+id/etNationality"
         android:layout_alignStart="@+id/etNationality"
-        android:text="National Id" />
+        android:hint="National Id" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
         android:layout_below="@+id/etNationalId"
         android:layout_alignLeft="@+id/etNationalId"
         android:layout_alignStart="@+id/etNationalId"
-        android:text="Phone Number" />
+        android:hint="Phone Number" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
         android:layout_below="@+id/etPhoneNumber"
         android:layout_alignLeft="@+id/etPhoneNumber"
         android:layout_alignStart="@+id/etPhoneNumber"
-        android:text="Email Address" />
+        android:hint="Email Address" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
         android:layout_below="@+id/etEmailAddress"
         android:layout_alignLeft="@+id/etEmailAddress"
         android:layout_alignStart="@+id/etEmailAddress"
-        android:text="Occupation" />
+        android:hint="Occupation" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
         android:layout_below="@+id/etOccupation"
         android:layout_alignLeft="@+id/etOccupation"
         android:layout_alignStart="@+id/etOccupation"
-        android:text="Date Of Birth" />
+        android:hint="Date Of Birth" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
         android:layout_below="@+id/etDateOfBirth"
         android:layout_alignRight="@+id/etDateOfBirth"
         android:layout_alignEnd="@+id/etDateOfBirth"
-        android:text="Physical Address" />
+        android:hint="Physical Address" />
 
     <Button
         android:layout_width="wrap_content"
