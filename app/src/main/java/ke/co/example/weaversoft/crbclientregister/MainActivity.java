@@ -139,8 +139,15 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-        ClientDetails item = (ClientDetails) adapter.getItemAtPosition(position);
-        Toast.makeText(MainActivity.this, item.getClientId()+"You have clicked item in position "+item.getFirstName(),
-                Toast.LENGTH_LONG).show();
+        ClientDetails clientDetails = (ClientDetails) adapter.getItemAtPosition(position);
+
+        final int result=1;
+
+        Toast.makeText(this, "Done step1", Toast.LENGTH_SHORT).show();
+        Intent clientIntent = new Intent(this, ViewClientScreen.class);
+        clientIntent.putExtra("clientInfo", clientDetails);
+
+        startActivityForResult(clientIntent, result);
+
     }
 }

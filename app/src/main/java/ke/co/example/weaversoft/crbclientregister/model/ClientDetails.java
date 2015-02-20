@@ -1,11 +1,12 @@
 package ke.co.example.weaversoft.crbclientregister.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by weaversoft on 2/17/2015.
  */
-public class ClientDetails {
+public class ClientDetails implements Serializable {
     private Long clientId;
     private String nationalId;
     private String firstName;

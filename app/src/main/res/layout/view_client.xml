@@ -55,7 +55,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerSepLayout"
         android:layout_centerHorizontal="true"
@@ -66,14 +66,15 @@
             android:layout_width="wrap_content"
             android:layout_height="183dp"
             android:id="@+id/imageView"
-            android:layout_weight="0.49"
-            android:padding="5dp" />
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/placeholder" />
 
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|top"
-            android:layout_weight="0.49">
+            android:layout_weight="1">
 
             <TableRow
                 android:id="@+id/tableRow1"
@@ -82,7 +83,7 @@
                 android:padding="5dip" >
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/tvClientName"
                     android:text="Row 1"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -94,7 +95,7 @@
                 android:padding="5dip" >
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvNationality"
                     android:text="Row 2"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -106,7 +107,7 @@
                 android:padding="5dip" >
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/tvEmailAddress"
                     android:text="Row 3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -114,33 +115,63 @@
         </TableLayout>
     </LinearLayout>
 
+
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|top"
+        android:layout_below="@+id/viewMainBodyLayout"
+        android:id="@+id/uploadphotoSection"
+        android:layout_weight="1">
+
+        <TableRow
+            android:id="@+id/photoRaw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Upload Client Photo"
+                android:id="@+id/btnUploadPhoto"
+                android:layout_weight="1" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/viewMainBodyLayout"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadphotoSection"
         android:layout_centerHorizontal="true"
         android:weightSum="1"
         android:id="@+id/viewActionLayout">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="View Next of Kin"
+            android:id="@+id/btnViewNextOfKin"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button2" />
+            android:text="Upload Id Photo "
+            android:id="@+id/btnUpolaIdPhoto"
+            android:layout_weight="2" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button3" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button4" />
+            android:text="Edit Details"
+            android:id="@+id/btnEditDetails"
+            android:layout_weight="3" />
     </LinearLayout>
 
 

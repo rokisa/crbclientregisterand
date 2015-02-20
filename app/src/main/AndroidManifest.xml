@@ -24,6 +24,10 @@
             android:label="Add New Client"
             android:theme="@style/AppTheme"/>
 
+        <activity android:name=".ViewClientScreen"
+            android:label="View Client Details"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
