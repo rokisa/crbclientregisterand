@@ -9,7 +9,10 @@ import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.GET;
+import retrofit.http.Multipart;
 import retrofit.http.POST;
+import retrofit.http.Part;
+import retrofit.mime.TypedFile;
 
 /**
  * Created by weaversoft on 2/18/2015.
@@ -22,4 +25,9 @@ public interface ClientDetailsAPI {
     @POST("/clientrec/save")
     public  void createClientDetails(@Body ClientDetails clientDetails,
                                      Callback<JSONObject> response);
+
+    @Multipart
+    @POST("/clientrec/uploadidphoto")
+    public void uploadClientIdPhoto(@Part("photo") TypedFile photo,
+                                    Callback<JSONObject> response);
 }

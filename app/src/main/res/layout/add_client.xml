@@ -185,24 +185,27 @@
         android:layout_alignEnd="@+id/etDateOfBirth"
         android:hint="Physical Address" />
 
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:id="@+id/btnCancel"
+        android:onClick="cancelCreation"
         android:layout_below="@+id/etPhysicalAddress"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="cancelCreation"/>
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Client"
         android:id="@+id/btnCreateClient"
-        android:layout_below="@+id/etPhysicalAddress"
-        android:layout_alignLeft="@+id/etPhysicalAddress"
-        android:layout_alignStart="@+id/etPhysicalAddress"
-        android:onClick="createClient"/>
+        android:onClick="createClient"
+        android:layout_alignTop="@+id/btnCancel"
+        android:layout_alignRight="@+id/etPhysicalAddress"
+        android:layout_alignEnd="@+id/etPhysicalAddress" />
+
 
 </RelativeLayout>

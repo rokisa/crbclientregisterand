@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +22,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements AdapterView.OnItemClickListener {
 
     TextView clientName;
     TextView statusTv;
@@ -36,6 +38,7 @@ public class MainActivity extends ListActivity {
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setVisibility(View.INVISIBLE);
+
         requestData();
     }
 
@@ -57,15 +60,12 @@ public class MainActivity extends ListActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void addNewScreenClient(View view) {
-
         Intent getAddClientScreen = new Intent(this,
                 AddClientScreen.class);
-
         final int result =1;
 
         getAddClientScreen.putExtra("ClientId", "NONE");
@@ -73,9 +73,6 @@ public class MainActivity extends ListActivity {
     }
 
     private void requestData(){
-//        //result = httpManager.getData("http://localhost:9000/clientrec/list");
-//        result = httpManager.getData("http://services.hanselandpetal.com/feeds/flowers.xml");
-
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
@@ -91,8 +88,15 @@ public class MainActivity extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 statusTv = (TextView) findViewById(R.id.statusTextView);
-                statusTv.setText(error.toString());
-                reportClientFetchError();
+
+                if(error.toString().equals("retrofit.RetrofitError: " +
+                        "com.google.gson.JsonSyntaxException: 0")){
+                    Toast.makeText(MainActivity.this, "Database is Empty",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    statusTv.setText(error.toString());
+                    reportClientFetchError();
+                }
             }
         });
     }
@@ -102,7 +106,13 @@ public class MainActivity extends ListActivity {
     }
 
     public void updateScreen(){
-        ClientAdapter clientAdapter = new ClientAdapter(this, R.layout.item_client, clientDetailsList);
+
+        ClientAdapter clientAdapter = new ClientAdapter(this, R.layout.item_client,
+                clientDetailsList);
+
+        ListView listView = getListView();
+        listView.setOnItemClickListener(this);
+
         setListAdapter(clientAdapter);
     }
 
@@ -119,9 +129,18 @@ public class MainActivity extends ListActivity {
 
         if(status.equals("ERROR")){
             Toast.makeText(this, "Client Creation Failed", Toast.LENGTH_LONG).show();
-        } else {
+        } else if(!status.equals("ERROR") && !status.equals("CANCELED")) {
             requestData();
             Toast.makeText(this, "Client Created Successfully", Toast.LENGTH_LONG).show();
+        } else if(status.equals("CANCELED")){
+            Toast.makeText(this, "Client Creation Canceled", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+        ClientDetails item = (ClientDetails) adapter.getItemAtPosition(position);
+        Toast.makeText(MainActivity.this, item.getClientId()+"You have clicked item in position "+item.getFirstName(),
+                Toast.LENGTH_LONG).show();
     }
 }

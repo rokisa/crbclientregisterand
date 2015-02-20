@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
@@ -34,6 +35,8 @@ public class ClientAdapter extends ArrayAdapter<ClientDetails> {
         ClientDetails clientDetails = clientDetailsList.get(position);
         TextView textView = (TextView) view.findViewById(R.id.textView1);
         textView.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName());
+        TextView tvDateOfBirth = (TextView) view.findViewById(R.id.tvDateOfbirth);
+        tvDateOfBirth.setText(new Date(clientDetails.getDateOfBirth()).toString());
 
         return view;
 
