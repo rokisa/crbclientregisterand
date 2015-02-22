@@ -140,10 +140,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
         ClientDetails clientDetails = (ClientDetails) adapter.getItemAtPosition(position);
-
         final int result=1;
-
-        Toast.makeText(this, "Done step1", Toast.LENGTH_SHORT).show();
         Intent clientIntent = new Intent(this, ViewClientScreen.class);
         clientIntent.putExtra("clientInfo", clientDetails);
 

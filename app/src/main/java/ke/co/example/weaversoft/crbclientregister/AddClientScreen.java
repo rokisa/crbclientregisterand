@@ -287,7 +287,7 @@ public class AddClientScreen extends Activity {
     }
 
     private  Date getDate(String strDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy");
         Date date = new Date();
         if (strDate.trim().length()!=0){
             try {

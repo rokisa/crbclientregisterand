@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/headerLayout">
@@ -22,7 +22,8 @@
             android:src="@drawable/logo_placeholder"
             android:layout_marginBottom="10dp"
             android:contentDescription="@string/client_ids_photo"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            android:layout_weight="2" />
 
         <TextView
             android:layout_width="234dp"
@@ -35,25 +36,30 @@
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
             android:textStyle="bold"
-            android:gravity="center|left" />
+            android:gravity="center|right"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout"
-        android:layout_below="@+id/headerLayout">
+        android:layout_below="@+id/headerLayout"
+        android:weightSum="1">
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_client_button"
-            android:textStyle="bold"
+            android:src="@drawable/add"
             android:onClick="addNewScreenClient"
-            android:id="@+id/button" />
+            android:layout_gravity="right"
+            android:id="@+id/imageButton"
+            android:layout_weight="0.06" />
+
+
     </LinearLayout>
 
     <RelativeLayout
@@ -73,6 +79,8 @@
             android:layout_centerInParent="true"
             android:visibility="invisible"
             android:id="@+id/progressBar" />
+
+
     </RelativeLayout>
 
     <RelativeLayout

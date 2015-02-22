@@ -63,59 +63,13 @@
         android:id="@+id/viewMainBodyLayout">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="183dp"
             android:id="@+id/imageView"
             android:layout_weight="0.5"
             android:padding="5dp"
             android:src="@drawable/placeholder" />
-
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|top"
-            android:layout_weight="1">
-
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dip" >
-
-                <TextView
-                    android:id="@+id/tvClientName"
-                    android:text="Row 1"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            </TableRow>
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dip" >
-
-                <TextView
-                    android:id="@+id/tvNationality"
-                    android:text="Row 2"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            </TableRow>
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dip" >
-
-                <TextView
-                    android:id="@+id/tvEmailAddress"
-                    android:text="Row 3"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            </TableRow>
-        </TableLayout>
     </LinearLayout>
-
-
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -127,51 +81,104 @@
 
         <TableRow
             android:id="@+id/photoRaw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:text="Upload Client Photo"
+                android:id="@+id/btnUploadPhoto"
+                android:gravity="right"
+                android:src="@drawable/editt"/>
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|top"
+        android:layout_below="@+id/uploadphotoSection"
+        android:id="@+id/clientDetailsSec"
+        android:layout_weight="1">
+
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dip" >
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Upload Client Photo"
-                android:id="@+id/btnUploadPhoto"
-                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/tvClientName"
+                android:text="Row 1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
 
+            <TextView
+                android:id="@+id/tvNationality"
+                android:text="Row 2"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/tvEmailAddress"
+                android:text="Row 3"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </TableRow>
     </TableLayout>
-
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadphotoSection"
+        android:layout_below="@+id/clientDetailsSec"
         android:layout_centerHorizontal="true"
         android:weightSum="1"
         android:id="@+id/viewActionLayout">
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="View Next of Kin"
             android:id="@+id/btnViewNextOfKin"
-            android:layout_weight="1" />
+            android:layout_weight="0.1"
+            android:src="@drawable/kin"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upload Id Photo "
             android:id="@+id/btnUpolaIdPhoto"
-            android:layout_weight="2" />
+            android:layout_weight="0.1"
+            android:src="@drawable/upload"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Details"
             android:id="@+id/btnEditDetails"
-            android:layout_weight="3" />
+            android:layout_weight="0.1"
+            android:onClick="openClientEditScreen"
+            android:src="@drawable/edit"
+            android:layout_marginLeft="40dp" />
     </LinearLayout>
 
 
