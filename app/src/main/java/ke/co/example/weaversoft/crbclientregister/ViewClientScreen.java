@@ -38,4 +38,12 @@ public class ViewClientScreen extends Activity {
         tvNationality.setText(clientDetails.getNationality());
         emailAddress.setText(clientDetails.getEmailAddress());
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent cancelClientCreationOperation = new Intent();
+        cancelClientCreationOperation.putExtra("status", "CANCELEDV");
+        setResult(RESULT_OK, cancelClientCreationOperation);
+        finish();
+    }
 }

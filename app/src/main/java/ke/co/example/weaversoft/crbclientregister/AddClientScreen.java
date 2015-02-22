@@ -170,7 +170,6 @@ public class AddClientScreen extends Activity {
         return tempStatus;
     }
 
-
     private void persisClientDetails(ClientDetails clientDetails) {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
@@ -182,7 +181,7 @@ public class AddClientScreen extends Activity {
                     @Override
                     public void success(JSONObject jsonObject, Response response) {
                         try {
-                            successClientCreation(jsonObject.toString());
+                            successClientCreation("CRTNSUCCESS");
                             Toast.makeText(AddClientScreen.this, "Data Persisted",
                                     Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
@@ -195,6 +194,14 @@ public class AddClientScreen extends Activity {
                     }
                 }
                 );
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent cancelClientCreationOperation = new Intent();
+        cancelClientCreationOperation.putExtra("status", "CANCELED");
+        setResult(RESULT_OK, cancelClientCreationOperation);
+        finish();
     }
 
     private void successClientCreation(String status){
