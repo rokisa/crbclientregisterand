@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import ke.co.example.weaversoft.crbclientregister.util.ClientDetailsUtil;
 
 /**
  * Created by weaversoft on 2/18/2015.
@@ -19,6 +20,7 @@ import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
 public class ClientAdapter extends ArrayAdapter<ClientDetails> {
     private Context context;
     private List<ClientDetails> clientDetailsList;
+    ClientDetailsUtil detailsUtil;
 
     public ClientAdapter(Context context, int resource, List<ClientDetails> clientDetailsList){
         super(context, resource, clientDetailsList);
@@ -28,7 +30,7 @@ public class ClientAdapter extends ArrayAdapter<ClientDetails> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        detailsUtil = new ClientDetailsUtil();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_client, parent, false);
 
@@ -36,7 +38,7 @@ public class ClientAdapter extends ArrayAdapter<ClientDetails> {
         TextView textView = (TextView) view.findViewById(R.id.textView1);
         textView.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName());
         TextView tvDateOfBirth = (TextView) view.findViewById(R.id.tvDateOfbirth);
-        tvDateOfBirth.setText(new Date(clientDetails.getDateOfBirth()).toString());
+        tvDateOfBirth.setText(detailsUtil.getLongDate(clientDetails.getDateOfBirth()));
 
         return view;
 

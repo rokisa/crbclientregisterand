@@ -3,12 +3,14 @@ package ke.co.example.weaversoft.crbclientregister;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import ke.co.example.weaversoft.crbclientregister.util.ClientDetailsUtil;
 
 /**
  * Created by weaversoft on 2/21/2015.
@@ -18,6 +20,7 @@ public class ViewClientScreen extends Activity {
     TextView tvNationality;
     TextView emailAddress;
     ClientDetails clientDetails;
+    ClientDetailsUtil detailsUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class ViewClientScreen extends Activity {
         finish();
     }
 
-    void openClientEditScreen(){
+    public void openClientEditScreen(View view){
         final int result=1;
         Intent clientIntent = new Intent(this, EditClientScreen.class);
         clientIntent.putExtra("clientInfo", clientDetails);

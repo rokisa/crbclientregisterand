@@ -2,7 +2,6 @@ package ke.co.example.weaversoft.crbclientregister;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ke.co.example.weaversoft.crbclientregister.api.ClientDetailsAPI;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
 import retrofit.Callback;
 import retrofit.RestAdapter;

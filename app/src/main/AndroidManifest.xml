@@ -28,6 +28,10 @@
             android:label="View Client Details"
             android:theme="@style/AppTheme"/>
 
+        <activity android:name=".EditClientScreen"
+            android:label="Edit Client Details"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

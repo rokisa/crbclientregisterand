@@ -13,14 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
+import ke.co.example.weaversoft.crbclientregister.api.ClientDetailsAPI;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import ke.co.example.weaversoft.crbclientregister.util.ClientDetailsUtil;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -30,12 +29,13 @@ import retrofit.client.Response;
  * Created by weaversoft on 2/17/2015.
  */
 public class AddClientScreen extends Activity {
+    ClientDetailsUtil detailsUtil;
     public static final String ENDPOINT
             ="http://10.0.2.2:9000/";
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
-    EditText dateOfBirthET;
+    EditText dOfBrthET;
     TextView tvLabel;
     EditText emailAddressET;
     private String valid_email;
@@ -44,6 +44,7 @@ public class AddClientScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        detailsUtil = new ClientDetailsUtil();
         setContentView(R.layout.add_client);
         Intent originatorActivity = getIntent();
         String clientId = originatorActivity.getExtras().getString("ClientId");
@@ -79,8 +80,8 @@ public class AddClientScreen extends Activity {
     };
 
     private void setDateOfBirth(int arg1, int arg2, int arg3){
-        dateOfBirthET.setText(new StringBuilder().append(day).append("/")
-          .append(month).append("/").append(year));
+        dOfBrthET.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
 
         Toast.makeText(AddClientScreen.this, new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year), Toast.LENGTH_LONG).show();
@@ -104,7 +105,7 @@ public class AddClientScreen extends Activity {
 
         EditText occupationET = (EditText)
                 findViewById(R.id.etOccupation);
-        Date dateOfBirth = getDate(dateOfBirthET.getText().toString());
+        Date dateOfBirth = detailsUtil.getDate(dOfBrthET.getText().toString());
 
         boolean validationStatus = validateClientInput(dateOfBirth, firstNameET.getText().toString(),
                 lastNameET.getText().toString(), nationalityET.getText().toString(),
@@ -230,14 +231,14 @@ public class AddClientScreen extends Activity {
      */
     private void initilizeUI() {
 
-        dateOfBirthET  = (EditText)
+        dOfBrthET = (EditText)
                 findViewById(R.id.etDateOfBirth);
 
-        dateOfBirthET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dOfBrthET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             @SuppressWarnings("deprecation")
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     showDialog(999);
                 }
             }
@@ -284,20 +285,5 @@ public class AddClientScreen extends Activity {
                         .matches();
             } // end of TextWatcher (email)
         });
-    }
-
-    private  Date getDate(String strDate){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy");
-        Date date = new Date();
-        if (strDate.trim().length()!=0){
-            try {
-                return date = formatter.parse(strDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return null;
-        } else{
-            return null;
-        }
     }
 }
