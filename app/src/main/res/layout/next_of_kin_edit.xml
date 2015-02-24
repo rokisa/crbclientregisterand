@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="20dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:id="@+id/imageView2"
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Edit Next Of Kin"
+        android:id="@+id/tvNextOfKinEdit"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:id="@+id/tvFirstName"
+        android:layout_below="@+id/tvNextOfKinEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKFirstName"
+        android:layout_alignTop="@+id/tvFirstName"
+        android:layout_centerHorizontal="true"
+        android:hint="First Name"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/etEdNOKFirstName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKLastName"
+        android:layout_below="@+id/etEdNOKFirstName"
+        android:layout_alignLeft="@+id/etEdNOKFirstName"
+        android:layout_alignStart="@+id/etEdNOKFirstName"
+        android:hint="Last Name"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Relationship"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/etEdNOKLastName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKRelationship"
+        android:layout_below="@+id/etEdNOKLastName"
+        android:layout_alignLeft="@+id/etEdNOKLastName"
+        android:layout_alignStart="@+id/etEdNOKLastName"
+        android:hint="Relationship"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="National Id"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/etEdNOKRelationship"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKNationalId"
+        android:layout_below="@+id/etEdNOKRelationship"
+        android:layout_alignLeft="@+id/etEdNOKRelationship"
+        android:layout_alignStart="@+id/etEdNOKRelationship"
+        android:hint="National Id"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/etEdNOKNationalId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKPhoneNumber"
+        android:inputType="phone"
+        android:ems="10"
+        android:layout_below="@+id/etEdNOKNationalId"
+        android:layout_alignLeft="@+id/etEdNOKNationalId"
+        android:layout_alignStart="@+id/etEdNOKNationalId"
+        android:hint="Phone Number"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/etEdNOKPhoneNumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEdNOKEmailAddress"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_below="@+id/etEdNOKPhoneNumber"
+        android:layout_alignLeft="@+id/etEdNOKPhoneNumber"
+        android:layout_alignStart="@+id/etEdNOKPhoneNumber"
+        android:hint="Email Address" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btnCancel"
+        android:onClick="cancelCreation"
+        android:layout_below="@+id/etEdNOKEmailAddress"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Next Of Kin"
+        android:id="@+id/btnUpdateNextOfKin"
+        android:onClick="updateNextOfKin"
+        android:layout_alignTop="@+id/btnCancel"
+        android:layout_alignRight="@+id/etEdNOKEmailAddress"
+        android:layout_alignEnd="@+id/etEdNOKEmailAddress" />
+
+</RelativeLayout>

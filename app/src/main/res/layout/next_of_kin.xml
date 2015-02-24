@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/headerLayout">
+
+        <TextView
+            android:layout_width="234dp"
+            android:layout_height="65dp"
+            android:text="Next Of Kin"
+            android:id="@+id/nextOfKinLabel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@+id/button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:textStyle="bold"
+            android:gravity="center|left"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/headerLayout"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:onClick="addNewScreenNextOfKin"
+            android:layout_gravity="right"
+            android:id="@+id/imageButton"
+            android:layout_weight="0.06" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bodylayout"
+        android:layout_below="@+id/linearLayout">
+
+        <ListView android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            android:id="@+id/progressBar" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodylayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/statusTextView"
+            android:background="@color/material_blue_grey_900"/>
+    </RelativeLayout>
+
+</RelativeLayout>

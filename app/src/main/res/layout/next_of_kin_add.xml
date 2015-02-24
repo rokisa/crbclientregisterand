@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="20dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:id="@+id/imageView2"
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="New Next Of Kin"
+        android:id="@+id/tvNextOfKinNew"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:id="@+id/tvFirstName"
+        android:layout_below="@+id/tvNextOfKinNew"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKFirstName"
+        android:layout_alignTop="@+id/tvFirstName"
+        android:layout_centerHorizontal="true"
+        android:hint="First Name"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/etNOKFirstName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKLastName"
+        android:layout_below="@+id/etNOKFirstName"
+        android:layout_alignLeft="@+id/etNOKFirstName"
+        android:layout_alignStart="@+id/etNOKFirstName"
+        android:hint="Last Name"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Relationship"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/etNOKLastName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKRelationship"
+        android:layout_below="@+id/etNOKLastName"
+        android:layout_alignLeft="@+id/etNOKLastName"
+        android:layout_alignStart="@+id/etNOKLastName"
+        android:hint="Relationship"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="National Id"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/etNOKRelationship"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKNationalId"
+        android:layout_below="@+id/etNOKRelationship"
+        android:layout_alignLeft="@+id/etNOKRelationship"
+        android:layout_alignStart="@+id/etNOKRelationship"
+        android:hint="National Id"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/etNOKNationalId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKPhoneNumber"
+        android:inputType="phone"
+        android:ems="10"
+        android:layout_below="@+id/etNOKNationalId"
+        android:layout_alignLeft="@+id/etNOKNationalId"
+        android:layout_alignStart="@+id/etNOKNationalId"
+        android:hint="Phone Number"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/etNOKPhoneNumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNOKEmailAddress"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_below="@+id/etNOKPhoneNumber"
+        android:layout_alignLeft="@+id/etNOKPhoneNumber"
+        android:layout_alignStart="@+id/etNOKPhoneNumber"
+        android:hint="Email Address" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btnCancel"
+        android:onClick="cancelCreation"
+        android:layout_below="@+id/etNOKEmailAddress"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Next Of Kin"
+        android:id="@+id/btnCreateNextOfKin"
+        android:onClick="createNextOfKin"
+        android:layout_alignTop="@+id/btnCancel"
+        android:layout_alignRight="@+id/etNOKEmailAddress"
+        android:layout_alignEnd="@+id/etNOKEmailAddress" />
+
+</RelativeLayout>

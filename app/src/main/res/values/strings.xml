@@ -7,5 +7,7 @@
     <string name="client_ids_photo">The photo of the Client\'s Id</string>
     <string name="clients_name">Client\'s Name</string>
     <string name="add_client_button">Add New Client</string>
+    <string name="next_of_kin_name">Next of Kin Name</string>
+    <string name="txt_rlationship">Relationship</string>
 
 </resources>
