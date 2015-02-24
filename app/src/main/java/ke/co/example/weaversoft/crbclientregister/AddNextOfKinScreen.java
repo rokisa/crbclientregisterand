@@ -25,7 +25,7 @@ import retrofit.client.Response;
 public class AddNextOfKinScreen extends Activity {
     EditText emailAddressNextOfKin;
     private String valid_email;
-    String clientId = "";
+    Long clientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class AddNextOfKinScreen extends Activity {
         setContentView(R.layout.next_of_kin_add);
 
         Intent originatorActivity = getIntent();
-        clientId = originatorActivity.getExtras().getString("ClientId");
+        clientId = originatorActivity.getExtras().getLong("ClientId");
         initilizeUI();
     }
 
@@ -58,7 +58,7 @@ public class AddNextOfKinScreen extends Activity {
                 relationshipET.getText().toString());
         if(validationStatus){
             NextOfKin nextOfKin = new NextOfKin();
-            nextOfKin.setCustomerId(Long.parseLong(clientId));
+            nextOfKin.setCustomerId(clientId);
             nextOfKin.setEmailAddress(emailAddressNextOfKin.getText().toString());
             nextOfKin.setFirstName(firstNameET.getText().toString());
             nextOfKin.setLastName(lastNameET.getText().toString());
@@ -147,6 +147,13 @@ public class AddNextOfKinScreen extends Activity {
         Intent intent = new Intent();
         intent.putExtra("status", status);
         setResult(RESULT_CANCELED , intent);
+        finish();
+    }
+
+    public void cancelCreation(View view) {
+        Intent cancelClientCreationOperation = new Intent();
+        cancelClientCreationOperation.putExtra("status", "CANCELED");
+        setResult(RESULT_OK, cancelClientCreationOperation);
         finish();
     }
 

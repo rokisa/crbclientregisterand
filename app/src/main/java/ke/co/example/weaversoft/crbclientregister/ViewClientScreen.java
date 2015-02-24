@@ -19,8 +19,10 @@ public class ViewClientScreen extends Activity {
     TextView tvClientName;
     TextView tvNationality;
     TextView emailAddress;
+    TextView tvDateOB;
+    TextView tvCVPhoneNumber;
     ClientDetails clientDetails;
-    ClientDetailsUtil detailsUtil;
+    ClientDetailsUtil detailsUtil = new ClientDetailsUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,17 @@ public class ViewClientScreen extends Activity {
     }
 
     private void initializeClientView() {
-        tvClientName = (TextView) findViewById(R.id.tvClientName);
+        tvClientName = (TextView) findViewById(R.id.vwClientName);
         tvNationality = (TextView) findViewById(R.id.tvNationality);
         emailAddress = (TextView) findViewById(R.id.tvEmailAddress);
+        tvDateOB = (TextView) findViewById(R.id.tvDateOB);
+        tvCVPhoneNumber = (TextView) findViewById(R.id.tvCVPhoneNumber);
 
         tvClientName.setText(clientDetails.getFirstName()+" "+clientDetails.getLastName());
         tvNationality.setText(clientDetails.getNationality());
         emailAddress.setText(clientDetails.getEmailAddress());
+        tvCVPhoneNumber.setText(clientDetails.getPhoneNumber());
+        tvDateOB.setText(detailsUtil.getLongDate(clientDetails.getDateOfBirth()));
     }
 
     @Override
@@ -58,6 +64,14 @@ public class ViewClientScreen extends Activity {
         clientIntent.putExtra("clientInfo", clientDetails);
 
         startActivityForResult(clientIntent, result);
+    }
+
+    public void viewNextOfKin(View view){
+        final int result=1;
+        Intent nextOfKinViewIntent = new Intent(this, ViewNextOfKin.class);
+        nextOfKinViewIntent.putExtra("clientInfo", clientDetails);
+
+        startActivityForResult(nextOfKinViewIntent, result);
     }
 
     @Override

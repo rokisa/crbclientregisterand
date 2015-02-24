@@ -23,8 +23,9 @@ public interface ClientDetailsAPI {
     @GET("/clientrec/list")
     public void fetchClientList(Callback<List<ClientDetails>> response);
 
-    @GET("/clientrec/getnextofkin")
-    public void fetchNextOfKin(Callback<List<NextOfKin>> response);
+    @POST("/clientrec/getnextofkin")
+    public void fetchNextOfKin(@Body ClientDetails clientDetails,
+                               Callback<List<NextOfKin>> response);
 
     @POST("/clientrec/save")
     public  void createClientDetails(@Body ClientDetails clientDetails,

@@ -36,19 +36,22 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
         Intent originatorIntent = getIntent();
 
         clientDetails = (ClientDetails) originatorIntent.
-                getSerializableExtra("clientDetails");
+                getSerializableExtra("clientInfo");
 
         requestData();
     }
 
     private void requestData(){
+        nextOfKinTV = (TextView) findViewById(R.id.nextOfKinLabel);
+        nextOfKinTV.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName() +"'s Next of Kin");
+
         ClientDetailsUtil clientDetailsUtil = new ClientDetailsUtil();
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(clientDetailsUtil.ENDPOINT)
                 .build();
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
 
-        api.fetchNextOfKin(new Callback<List<NextOfKin>>() {
+        api.fetchNextOfKin(clientDetails, new Callback<List<NextOfKin>>() {
             @Override
             public void success(List<NextOfKin> nextOfKinListNw, Response response) {
                 nextOfKinList = nextOfKinListNw;
@@ -71,8 +74,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
     }
 
     public void updateScreen(){
-        nextOfKinTV = (TextView) findViewById(R.id.nextOfKinLabel);
-        nextOfKinTV.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName() +"'s Next of Kin");
+
         NextOfKinAdapter nextOfKinAdapter = new NextOfKinAdapter(this, R.layout.next_of_kin_item,
                 nextOfKinList);
 
@@ -99,17 +101,28 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
         NextOfKin nextOfKin = (NextOfKin) adapter.getItemAtPosition(position);
+        nextOfKin.setCustomerId(clientDetails.getClientId());
         final int result=1;
         Intent nextOfKinIntent = new Intent(this, EditNextOfKinScreen.class);
-        nextOfKinIntent.putExtra("nextOfKinInfo", nextOfKin);
 
+        nextOfKinIntent.putExtra("nextOfKinInfo", nextOfKin);
         startActivityForResult(nextOfKinIntent, result);
 
     }
 
     public void createNextOfKin(View view){
-        Intent createNextOfKinIntent = new Intent(this, AddClientScreen.class);
+        int result = 1;
+        Intent createNextOfKinIntent = new Intent(this, AddNextOfKinScreen.class);
         createNextOfKinIntent.putExtra("ClientId", clientDetails.getClientId());
+        startActivityForResult(createNextOfKinIntent, result);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent cancelClientCreationOperation = new Intent();
+        cancelClientCreationOperation.putExtra("status", "CANCELED");
+        setResult(RESULT_OK, cancelClientCreationOperation);
+        finish();
     }
 
     @Override

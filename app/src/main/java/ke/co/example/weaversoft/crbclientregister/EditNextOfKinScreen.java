@@ -113,8 +113,6 @@ public class EditNextOfKinScreen extends Activity {
                 emailAddressNextOfKin.getText().toString(), phoneNumberET.getText().toString(),
                 relationshipET.getText().toString());
         if(validationStatus){
-            NextOfKin nextOfKin = new NextOfKin();
-            nextOfKin.setCustomerId(nextOfKin.getCustomerId());
             nextOfKin.setEmailAddress(emailAddressNextOfKin.getText().toString());
             nextOfKin.setFirstName(firstNameET.getText().toString());
             nextOfKin.setLastName(lastNameET.getText().toString());
@@ -171,6 +169,13 @@ public class EditNextOfKinScreen extends Activity {
         Intent intent = new Intent();
         intent.putExtra("status", status);
         setResult(RESULT_CANCELED , intent);
+        finish();
+    }
+
+    public void cancelCreation(View view) {
+        Intent cancelClientCreationOperation = new Intent();
+        cancelClientCreationOperation.putExtra("status", "CANCELED");
+        setResult(RESULT_OK, cancelClientCreationOperation);
         finish();
     }
 

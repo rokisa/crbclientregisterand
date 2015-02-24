@@ -12,23 +12,12 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/headerLayout">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/imageView1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/logo_placeholder"
-            android:layout_marginBottom="10dp"
-            android:contentDescription="@string/client_ids_photo"
-            android:paddingRight="10dp" />
 
         <TextView
-            android:layout_width="234dp"
+            android:layout_width="fill_parent"
             android:layout_height="65dp"
             android:text="CRB Clients Details"
-            android:id="@+id/camponyName"
+            android:id="@+id/vwClientName"
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/button"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -101,6 +90,7 @@
         android:layout_gravity="center_vertical|top"
         android:layout_below="@+id/uploadphotoSection"
         android:id="@+id/clientDetailsSec"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1">
 
         <TableRow
@@ -110,11 +100,12 @@
             android:padding="5dip" >
 
             <TextView
-                android:id="@+id/tvClientName"
+                android:id="@+id/tvDateOB"
                 android:text="Row 1"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>
+
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
@@ -139,6 +130,18 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:id="@+id/tvCVPhoneNumber"
+                android:text="Row 1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </TableRow>
     </TableLayout>
 
     <LinearLayout
@@ -156,6 +159,7 @@
             android:text="View Next of Kin"
             android:id="@+id/btnViewNextOfKin"
             android:layout_weight="0.1"
+            android:onClick="viewNextOfKin"
             android:src="@drawable/kin"
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp" />
