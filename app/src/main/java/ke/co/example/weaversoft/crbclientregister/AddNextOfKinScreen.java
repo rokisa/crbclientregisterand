@@ -67,7 +67,6 @@ public class AddNextOfKinScreen extends Activity {
             nextOfKin.setNationalId(nationalIdET.getText().toString());
             persistNextOfKin(nextOfKin);
         }
-
     }
 
     private boolean validateNOKInput(String nationalId, String firstName, String lastName,

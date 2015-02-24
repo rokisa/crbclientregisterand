@@ -11,13 +11,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import ke.co.example.weaversoft.crbclientregister.api.ClientDetailsAPI;
+import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
 import ke.co.example.weaversoft.crbclientregister.model.NextOfKin;
+import ke.co.example.weaversoft.crbclientregister.util.ClientDetailsUtil;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by weaversoft on 2/24/2015.
  */
 public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemClickListener {
     List<NextOfKin> nextOfKinList;
+    ClientDetails clientDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +35,43 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
 
         Intent originatorIntent = getIntent();
 
-        nextOfKinList = (List<NextOfKin>) originatorIntent.
-                getSerializableExtra("nextOfKinListInfo");
-        updateScreen();
+        clientDetails = (ClientDetails) originatorIntent.
+                getSerializableExtra("clientDetails");
+
+        requestData();
+    }
+
+    private void requestData(){
+        ClientDetailsUtil clientDetailsUtil = new ClientDetailsUtil();
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(clientDetailsUtil.ENDPOINT)
+                .build();
+        ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
+
+        api.fetchNextOfKin(new Callback<List<NextOfKin>>() {
+            @Override
+            public void success(List<NextOfKin> nextOfKinListNw, Response response) {
+                nextOfKinList = nextOfKinListNw;
+                updateScreen();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                if(error.toString().equals("retrofit.RetrofitError: " +
+                        "com.google.gson.JsonSyntaxException: 0")){
+                    Toast.makeText(ViewNextOfKin.this, "Database is Empty",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ViewNextOfKin.this, error.toString(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public void updateScreen(){
-
+//nextOfKinList
         NextOfKinAdapter nextOfKinAdapter = new NextOfKinAdapter(this, R.layout.next_of_kin_item,
                 nextOfKinList);
 
@@ -67,6 +106,11 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
 
     }
 
+    public void createNextOfKin(View view){
+        Intent createNextOfKinIntent = new Intent(this, AddClientScreen.class);
+        createNextOfKinIntent.putExtra("ClientId", clientDetails.getClientId());
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -78,7 +122,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
         if(status.equals("ERROR")){
             Toast.makeText(this, "Next Of Kin Creation Failed", Toast.LENGTH_LONG).show();
         } else if(status.equals("CRTNSUCCESS")) {
-            //requestData();
+            requestData();
             Toast.makeText(this, "Next Of Kin Created Successfully", Toast.LENGTH_LONG).show();
         } else if(status.equals("CANCELED")){
             Toast.makeText(this, "Next Of Kin Creation Canceled", Toast.LENGTH_LONG).show();
