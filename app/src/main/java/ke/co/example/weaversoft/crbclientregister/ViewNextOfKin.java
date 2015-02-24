@@ -27,7 +27,7 @@ import retrofit.client.Response;
 public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemClickListener {
     List<NextOfKin> nextOfKinList;
     ClientDetails clientDetails;
-
+    TextView nextOfKinTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,8 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
     }
 
     public void updateScreen(){
-//nextOfKinList
+        nextOfKinTV = (TextView) findViewById(R.id.nextOfKinLabel);
+        nextOfKinTV.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName() +"'s Next of Kin");
         NextOfKinAdapter nextOfKinAdapter = new NextOfKinAdapter(this, R.layout.next_of_kin_item,
                 nextOfKinList);
 

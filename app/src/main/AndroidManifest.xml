@@ -32,6 +32,18 @@
             android:label="Edit Client Details"
             android:theme="@style/AppTheme"/>
 
+        <activity android:name=".ViewNextOfKin"
+            android:label="Next of Kin List"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".AddNextOfKinScreen"
+            android:label="Add New Next of Kin"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".EditNextOfKinScreen"
+            android:label="Edit Next of Kin"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
