@@ -1,8 +1,12 @@
 package ke.co.example.weaversoft.crbclientregister.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 
 /**
  * Created by weaversoft on 2/22/2015.
@@ -34,5 +38,14 @@ public class ClientDetailsUtil {
         } catch (Exception e){
         }
         return strDate;
+    }
+
+    public String getMimeType(File photo){
+        try {
+            return photo.toURL().openConnection().getContentType();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

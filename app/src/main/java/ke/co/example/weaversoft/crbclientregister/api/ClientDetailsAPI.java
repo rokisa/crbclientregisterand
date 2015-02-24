@@ -13,7 +13,9 @@ import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
+import retrofit.http.Path;
 import retrofit.mime.TypedFile;
+import retrofit.mime.TypedString;
 
 /**
  * Created by weaversoft on 2/18/2015.
@@ -38,6 +40,7 @@ public interface ClientDetailsAPI {
     @Multipart
     @POST("/clientrec/uploadidphoto")
     public void uploadClientIdPhoto(@Part("photo") TypedFile photo,
+                                    @Part("clientId") TypedString clientId,
                                     Callback<JSONObject> response);
 
     @POST("/clientrec/addnextofkin")

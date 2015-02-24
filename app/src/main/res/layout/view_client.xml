@@ -54,10 +54,9 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="183dp"
-            android:id="@+id/imageView"
+            android:id="@+id/imgViewProfile"
             android:layout_weight="0.5"
-            android:padding="5dp"
-            android:src="@drawable/placeholder" />
+            android:padding="5dp" />
     </LinearLayout>
 
     <TableLayout
@@ -79,7 +78,8 @@
                 android:text="Upload Client Photo"
                 android:id="@+id/btnUploadPhoto"
                 android:gravity="right"
-                android:src="@drawable/editt"/>
+                android:onClick="changeClientImage"
+                android:src="@drawable/uploadphoto"/>
 
         </TableRow>
     </TableLayout>
