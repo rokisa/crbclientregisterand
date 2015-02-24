@@ -68,32 +68,28 @@ public class EditClientScreen extends Activity {
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
         if (id == 999) {
-            return new DatePickerDialog(this, myEditDateListener, year, month, day);
+            return new DatePickerDialog(this, datePickerListener, year, month, day);
         }
         return null;
     }
 
-    private DatePickerDialog.OnDateSetListener myEditDateListener
-            = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
-            setEditedDateOfBirth(arg1, arg2, arg3);
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+        // when dialog box is closed, below method will be called.
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
+
+            // set selected date into textview
+            dateOfBirthET.setText(new StringBuilder().append(day).append("/")
+                    .append(month+1).append("/").append(year));
+
+            Toast.makeText(EditClientScreen.this, dateOfBirthET.getText().toString(), Toast.LENGTH_LONG).show();
 
         }
     };
-
-    private void setEditedDateOfBirth(int arg1, int arg2, int arg3){
-
-        dateOfBirthET.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
-
-        Toast.makeText(EditClientScreen.this, new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year), Toast.LENGTH_LONG).show();
-    }
 
     private void initializeClientView() {
 
@@ -144,7 +140,6 @@ public class EditClientScreen extends Activity {
                 nationalIdET.getText().toString(), physicalAddressET.getText().toString(),
                 occupationET.getText().toString(), phoneNumberET.getText().toString());
         if(validationStatus){
-            ClientDetails clientDetails = new ClientDetails();
             clientDetails.setDateOfBirth(dateOfBirth.getTime());
             clientDetails.setEmailAddress(emailAddressET.getText().toString());
             clientDetails.setFirstName(firstNameET.getText().toString());
@@ -154,7 +149,6 @@ public class EditClientScreen extends Activity {
             clientDetails.setOccupation(occupationET.getText().toString());
             clientDetails.setPhysicalAddress(physicalAddressET.getText().toString());
             clientDetails.setPhoneNumber(phoneNumberET.getText().toString());
-
             persisClientDetails();
         }
     }
@@ -206,7 +200,7 @@ public class EditClientScreen extends Activity {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
-        Toast.makeText(EditClientScreen.this, "About to Persist Data", Toast.LENGTH_LONG).show();
+
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
         api.updateClientDetails(clientDetails,
                 new Callback<JSONObject>() {
@@ -214,8 +208,8 @@ public class EditClientScreen extends Activity {
                     public void success(JSONObject jsonObject, Response response) {
                         try {
                             successClientCreation("SUCCESS");
-                            Toast.makeText(EditClientScreen.this, "Data Persisted",
-                                    Toast.LENGTH_LONG).show();
+                         /*   Toast.makeText(EditClientScreen.this, "Data Persisted",
+                                    Toast.LENGTH_LONG).show();*/
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -70,7 +70,7 @@ public class ViewClientScreen extends Activity {
 
         if(status.equals("ERROR")){
             Toast.makeText(this, "Client Details Update Failed", Toast.LENGTH_LONG).show();
-        } else if(!status.equals("SUCCESS")) {
+        } else if(status.equals("SUCCESS")) {
             clientDetails = (ClientDetails) returningIntent.
                     getSerializableExtra("clientInfo");
             initializeClientView();

@@ -61,31 +61,27 @@ public class AddClientScreen extends Activity {
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
         if (id == 999) {
-            return new DatePickerDialog(this, myDateListener, year, month, day);
+            return new DatePickerDialog(this, datePickerListener, year, month, day);
         }
         return null;
     }
 
-    private DatePickerDialog.OnDateSetListener myDateListener
-            = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
-            setDateOfBirth(arg1, arg2, arg3);
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
+        // when dialog box is closed, below method will be called.
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
+
+            // set selected date into textview
+            dOfBrthET.setText(new StringBuilder().append(day).append("/")
+                    .append(month+1).append("/").append(year));
+
+            Toast.makeText(AddClientScreen.this, dOfBrthET.getText().toString(), Toast.LENGTH_LONG).show();
         }
     };
-
-    private void setDateOfBirth(int arg1, int arg2, int arg3){
-        dOfBrthET.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
-
-        Toast.makeText(AddClientScreen.this, new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year), Toast.LENGTH_LONG).show();
-    }
 
     public void createClient(View view) {
         EditText nationalIdET = (EditText)

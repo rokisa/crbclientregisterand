@@ -129,7 +129,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
         if(status.equals("ERROR")){
             Toast.makeText(this, "Client Creation Failed", Toast.LENGTH_LONG).show();
-        } else if(!status.equals("CRTNSUCCESS")) {
+        } else if(status.equals("CRTNSUCCESS")) {
             requestData();
             Toast.makeText(this, "Client Created Successfully", Toast.LENGTH_LONG).show();
         } else if(status.equals("CANCELED")){
