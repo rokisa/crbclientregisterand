@@ -14,9 +14,6 @@
         android:gravity="top"
         android:textSize="@dimen/abc_text_size_large_material"
         android:textStyle="bold"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
-        android:layout_toEndOf="@+id/imageView1"
         android:paddingTop="7dp"
         android:paddingLeft="4dp"/>
 
@@ -26,9 +23,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/txt_rlationship"
         android:id="@+id/tv_relationship"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
-        android:layout_toEndOf="@+id/imageView1"
         android:paddingBottom="10dp"
         android:paddingTop="5dp"
         android:paddingLeft="4dp"/>
