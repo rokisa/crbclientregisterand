@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import ke.co.example.weaversoft.crbclientregister.model.NextOfKin;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -34,4 +35,12 @@ public interface ClientDetailsAPI {
     @POST("/clientrec/uploadidphoto")
     public void uploadClientIdPhoto(@Part("photo") TypedFile photo,
                                     Callback<JSONObject> response);
+
+    @POST("/clientrec/addnextofkin")
+    public void createNextOfKin(@Body NextOfKin nextOfKin,
+                                Callback<JSONObject> response);
+
+    @POST("/clientrec/updatenextofkin")
+    public void updateNextOfKin(@Body NextOfKin nextOfKin,
+                                Callback<JSONObject> response);
 }

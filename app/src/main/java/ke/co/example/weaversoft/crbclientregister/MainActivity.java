@@ -16,6 +16,7 @@ import java.util.List;
 
 import ke.co.example.weaversoft.crbclientregister.api.ClientDetailsAPI;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
+import ke.co.example.weaversoft.crbclientregister.util.ClientDetailsUtil;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -28,8 +29,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
     TextView statusTv;
     ProgressBar pb;
     List<ClientDetails> clientDetailsList;
-    public static final String ENDPOINT
-            ="http://10.0.2.2:9000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,9 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
     }
 
     private void requestData(){
+        ClientDetailsUtil clientDetailsUtil = new ClientDetailsUtil();
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(clientDetailsUtil.ENDPOINT)
                 .build();
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
 

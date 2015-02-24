@@ -30,8 +30,6 @@ import retrofit.client.Response;
  */
 public class AddClientScreen extends Activity {
     ClientDetailsUtil detailsUtil;
-    public static final String ENDPOINT
-            ="http://10.0.2.2:9000/";
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
@@ -169,7 +167,7 @@ public class AddClientScreen extends Activity {
 
     private void persisClientDetails(ClientDetails clientDetails) {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(detailsUtil.ENDPOINT)
                 .build();
         Toast.makeText(AddClientScreen.this, "About to Persist Data", Toast.LENGTH_LONG).show();
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);

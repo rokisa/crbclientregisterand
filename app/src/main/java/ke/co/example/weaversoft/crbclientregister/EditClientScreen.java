@@ -29,8 +29,6 @@ import retrofit.client.Response;
 public class EditClientScreen extends Activity {
     ClientDetails clientDetails;
     ClientDetailsUtil detailsUtil;
-    public static final String ENDPOINT
-            ="http://10.0.2.2:9000/";
     EditText nationalIdET;
     EditText firstNameET;
     EditText lastNameET;
@@ -198,7 +196,7 @@ public class EditClientScreen extends Activity {
 
     private void persisClientDetails() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(detailsUtil.ENDPOINT)
                 .build();
 
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);

@@ -8,6 +8,8 @@ import java.util.Date;
  * Created by weaversoft on 2/22/2015.
  */
 public class ClientDetailsUtil {
+    public static final String ENDPOINT
+            ="http://10.0.2.2:9000/";
 
     public Date getDate(String strDate){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy");

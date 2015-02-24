@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import ke.co.example.weaversoft.crbclientregister.model.NextOfKin;
@@ -63,5 +65,23 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
 
         startActivityForResult(nextOfKinIntent, result);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Intent returningIntent = data;
+
+        String status = returningIntent.getExtras().getString("status");
+
+        if(status.equals("ERROR")){
+            Toast.makeText(this, "Next Of Kin Creation Failed", Toast.LENGTH_LONG).show();
+        } else if(status.equals("CRTNSUCCESS")) {
+            //requestData();
+            Toast.makeText(this, "Next Of Kin Created Successfully", Toast.LENGTH_LONG).show();
+        } else if(status.equals("CANCELED")){
+            Toast.makeText(this, "Next Of Kin Creation Canceled", Toast.LENGTH_LONG).show();
+        }
     }
 }
