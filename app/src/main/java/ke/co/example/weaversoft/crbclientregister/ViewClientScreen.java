@@ -16,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.File;
-import java.net.URI;
 
 import ke.co.example.weaversoft.crbclientregister.api.ClientDetailsAPI;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
@@ -29,7 +27,6 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
-import retrofit.mime.TypedString;
 
 /**
  * Created by weaversoft on 2/21/2015.
@@ -45,7 +42,8 @@ public class ViewClientScreen extends Activity {
     ImageView imgProfile;
     ImageView imgIdPhoto;
     File photo;
-    private static final int SELECTED_PICTURE = 1;
+    private static final int SELECTED_PROFILE_PICTURE = 99;
+    private static final int SELECTED_ID_PICTURE = 98;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +59,17 @@ public class ViewClientScreen extends Activity {
         initializeClientView();
     }
 
-    public void changeClientImage(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, SELECTED_PICTURE);
+    public void captureClientImage(View view) {
+/*        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);*/
+        Intent capturePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(capturePhotoIntent, SELECTED_PROFILE_PICTURE);
 
+    }
+
+    public void captureIdImage(View view){
+        Intent idCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(idCaptureIntent, SELECTED_ID_PICTURE);
     }
 
     private void initializeClientView() {
@@ -110,9 +114,9 @@ public class ViewClientScreen extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode==SELECTED_PICTURE) {
-            if (resultCode == RESULT_OK) {
+//SELECTED_ID_PICTURE
+        switch (requestCode){
+            case SELECTED_PROFILE_PICTURE:
                 Uri uri = data.getData();
                 String[] projection = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getContentResolver().query(uri,
@@ -127,26 +131,23 @@ public class ViewClientScreen extends Activity {
                 imgProfile.setBackground(drawable);
 
                 photo = new File(filePath);
-                //String ext = FilenameUtils.getExtension(
                 TypedFile typedFile = new TypedFile(detailsUtil.getMimeType(photo), photo);
                 RestAdapter adapter = new RestAdapter.Builder()
                         .setEndpoint(detailsUtil.ENDPOINT)
                         .build();
 
-                Toast.makeText(ViewClientScreen.this, "Almost posting the profile pic",
+                Toast.makeText(ViewClientScreen.this, "Uploading client's picture",
                         Toast.LENGTH_LONG).show();
 
-                TypedString typedString = new TypedString(clientDetails.getClientId().toString());
-
                 ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
-                api.uploadClientIdPhoto(typedFile, typedString,
+                api.uploadClientProfilePhoto(typedFile, clientDetails.getClientId().toString(),
                         new Callback<JSONObject>() {
                             @Override
                             public void success(JSONObject jsonObject, Response response) {
                                 try {
-                                    //successClientCreation("SUCCESS");
-                            Toast.makeText(ViewClientScreen.this, "Data Persisted",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ViewClientScreen.this, "Client's picture " +
+                                                    "uploaded successfully",
+                                            Toast.LENGTH_LONG).show();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -154,28 +155,69 @@ public class ViewClientScreen extends Activity {
 
                             @Override
                             public void failure(RetrofitError error) {
-                               // errorClientCreation("ERROR");
+                                Toast.makeText(ViewClientScreen.this, error.toString(),
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                 );
+            case SELECTED_ID_PICTURE:
+                Uri uriId = data.getData();
+                String[] projectionId = {MediaStore.Images.Media.DATA};
+                Cursor cursorId = getContentResolver().query(uriId,
+                        projectionId, null, null, null);
+                cursorId.moveToFirst();
+                int columnIndexId = cursorId.getColumnIndex(projectionId[0]);
+                String filePathId = cursorId.getString(columnIndexId);
+                cursorId.close();
 
-/*                Toast.makeText(ViewClientScreen.this, filePath.toString(),
-                        Toast.LENGTH_LONG).show();*/
-            }
-        } else {
-            Intent returningIntent = data;
-            String status = returningIntent.getExtras().getString("status");
+                Bitmap selectedImageId = BitmapFactory.decodeFile(filePathId);
+                Drawable drawableId = new BitmapDrawable(selectedImageId);
+                //imgProfile.setBackground(drawableId);
 
-            if (status.equals("ERROR")) {
-                Toast.makeText(this, "Client Details Update Failed", Toast.LENGTH_LONG).show();
-            } else if (status.equals("SUCCESS")) {
-                clientDetails = (ClientDetails) returningIntent.
-                        getSerializableExtra("clientInfo");
-                initializeClientView();
-                Toast.makeText(this, "Client Updated Successfully", Toast.LENGTH_LONG).show();
-            } else if (status.equals("CANCELED")) {
-                Toast.makeText(this, "Client Updated Canceled", Toast.LENGTH_LONG).show();
-            }
+                photo = new File(filePathId);
+                TypedFile typedFileId = new TypedFile(detailsUtil.getMimeType(photo), photo);
+                RestAdapter adapterId = new RestAdapter.Builder()
+                        .setEndpoint(detailsUtil.ENDPOINT)
+                        .build();
+
+                Toast.makeText(ViewClientScreen.this, "Uploading client's id photo",
+                        Toast.LENGTH_LONG).show();
+
+                ClientDetailsAPI apiId = adapterId.create(ClientDetailsAPI.class);
+                apiId.uploadClientIdPhoto(typedFileId, clientDetails.getClientId().toString(),
+                        new Callback<JSONObject>() {
+                            @Override
+                            public void success(JSONObject jsonObject, Response response) {
+                                try {
+                                    Toast.makeText(ViewClientScreen.this, "Client's id picture " +
+                                                    "uploaded Successfully",
+                                            Toast.LENGTH_LONG).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(ViewClientScreen.this, error.toString(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+            case 1:
+                Intent returningIntent = data;
+                String status = returningIntent.getExtras().getString("status");
+
+                if (status.equals("ERROR")) {
+                    Toast.makeText(this, "Client Details Update Failed", Toast.LENGTH_LONG).show();
+                } else if (status.equals("SUCCESS")) {
+                    clientDetails = (ClientDetails) returningIntent.
+                            getSerializableExtra("clientInfo");
+                    initializeClientView();
+                    Toast.makeText(this, "Client Updated Successfully", Toast.LENGTH_LONG).show();
+                } else if (status.equals("CANCELED")) {
+                    Toast.makeText(this, "Client Updated Canceled", Toast.LENGTH_LONG).show();
+                }
         }
     }
 

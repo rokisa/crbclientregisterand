@@ -53,10 +53,11 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="183dp"
+            android:layout_height="250dp"
             android:id="@+id/imgViewProfile"
             android:layout_weight="0.5"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:background="@drawable/placeholder" />
     </LinearLayout>
 
     <TableLayout
@@ -78,7 +79,7 @@
                 android:text="Upload Client Photo"
                 android:id="@+id/btnUploadPhoto"
                 android:gravity="right"
-                android:onClick="changeClientImage"
+                android:onClick="captureClientImage"
                 android:src="@drawable/uploadphoto"/>
 
         </TableRow>
@@ -90,7 +91,7 @@
         android:layout_gravity="center_vertical|top"
         android:layout_below="@+id/uploadphotoSection"
         android:id="@+id/clientDetailsSec"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1">
 
         <TableRow
@@ -170,6 +171,7 @@
             android:text="Upload Id Photo "
             android:id="@+id/btnUpolaIdPhoto"
             android:layout_weight="0.1"
+            android:onClick="captureIdImage"
             android:src="@drawable/upload"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp" />

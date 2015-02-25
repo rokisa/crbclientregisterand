@@ -12,6 +12,7 @@ import retrofit.http.Field;
 import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.mime.TypedFile;
@@ -38,9 +39,15 @@ public interface ClientDetailsAPI {
                                      Callback<JSONObject> response);
 
     @Multipart
-    @POST("/clientrec/uploadidphoto")
+    @PUT("/clientrec/uploadidphoto")
     public void uploadClientIdPhoto(@Part("photo") TypedFile photo,
-                                    @Part("clientId") TypedString clientId,
+                                    @Part("clientId") String clientId,
+                                    Callback<JSONObject> response);
+
+    @Multipart
+    @PUT("/clientrec/uploadprofilephoto")
+    public void uploadClientProfilePhoto(@Part("photo") TypedFile photo,
+                                    @Part("clientId") String clientId,
                                     Callback<JSONObject> response);
 
     @POST("/clientrec/addnextofkin")
