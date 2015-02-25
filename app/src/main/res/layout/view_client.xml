@@ -57,7 +57,7 @@
             android:id="@+id/imgViewProfile"
             android:layout_weight="0.5"
             android:padding="5dp"
-            android:background="@drawable/placeholder" />
+            android:src="@drawable/placeholder" />
     </LinearLayout>
 
     <TableLayout
