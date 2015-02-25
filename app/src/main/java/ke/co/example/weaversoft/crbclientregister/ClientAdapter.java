@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +42,13 @@ public class ClientAdapter extends ArrayAdapter<ClientDetails> {
         textView.setText(clientDetails.getFirstName() + " " + clientDetails.getLastName());
         TextView tvDateOfBirth = (TextView) view.findViewById(R.id.tvDateOfbirth);
         tvDateOfBirth.setText(detailsUtil.getLongDate(clientDetails.getDateOfBirth()));
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView1);
+        if(clientDetails.getPhoto()!=null){
+            if(clientDetails.getPhoto().trim().length()!=0){
+                Picasso.with(context).load("http://localhost:9000/assets/images/clientphotos/"+
+                        clientDetails.getPhoto()).into(imageView);
+            }
+        }
 
         return view;
 

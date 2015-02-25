@@ -7,6 +7,7 @@ import java.util.List;
 import ke.co.example.weaversoft.crbclientregister.model.ClientDetails;
 import ke.co.example.weaversoft.crbclientregister.model.NextOfKin;
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.GET;
@@ -15,6 +16,7 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Part;
 import retrofit.http.Path;
+import retrofit.http.Streaming;
 import retrofit.mime.TypedFile;
 import retrofit.mime.TypedString;
 
@@ -57,5 +59,11 @@ public interface ClientDetailsAPI {
     @POST("/clientrec/updatenextofkin")
     public void updateNextOfKin(@Body NextOfKin nextOfKin,
                                 Callback<JSONObject> response);
+
+
+    @GET("/assets/images/clientphotos/{filename}")
+    @Streaming
+    void getClientPhoto(@Path("filename") String filename,
+                Callback<Response> callback);
 
 }

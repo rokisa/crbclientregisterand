@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONObject;
 
 import java.io.File;
@@ -95,6 +97,12 @@ public class ViewClientScreen extends Activity {
         emailAddress.setText(clientDetails.getEmailAddress());
         tvCVPhoneNumber.setText(clientDetails.getPhoneNumber());
         tvDateOB.setText(detailsUtil.getLongDate(clientDetails.getDateOfBirth()));
+        if(clientDetails.getPhoto()!=null){
+            if(clientDetails.getPhoto().trim().length()!=0){
+                Picasso.with(getApplicationContext()).load("http://localhost:9000/assets/images/clientphotos/"+
+                        clientDetails.getPhoto()).into(imgProfile);
+            }
+        }
     }
 
     @Override

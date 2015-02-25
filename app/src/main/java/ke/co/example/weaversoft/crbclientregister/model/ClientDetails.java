@@ -18,6 +18,7 @@ public class ClientDetails implements Serializable {
     private long dateOfBirth;
     private String occupation;
     private String nationalIdPhoto;
+    public String photo;
 
     public Long getClientId() {
         return clientId;
@@ -108,6 +109,14 @@ public class ClientDetails implements Serializable {
         this.nationalIdPhoto = nationalIdPhoto;
     }
 
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
 
 }
