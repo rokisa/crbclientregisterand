@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
     List<NextOfKin> nextOfKinList;
     ClientDetails clientDetails;
     TextView nextOfKinTV;
+    ProgressBar pb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,9 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
 
         clientDetails = (ClientDetails) originatorIntent.
                 getSerializableExtra("clientInfo");
+
+        pb = (ProgressBar) findViewById(R.id.progressBarNOK);
+        pb.setVisibility(View.INVISIBLE);
 
         requestData();
     }
@@ -50,7 +55,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
                 .setEndpoint(clientDetailsUtil.ENDPOINT)
                 .build();
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
-
+        pb.setVisibility(View.VISIBLE);
         api.fetchNextOfKin(clientDetails, new Callback<List<NextOfKin>>() {
             @Override
             public void success(List<NextOfKin> nextOfKinListNw, Response response) {
@@ -69,6 +74,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
                     Toast.makeText(ViewNextOfKin.this, error.toString(),
                             Toast.LENGTH_LONG).show();
                 }
+                pb.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -82,6 +88,7 @@ public class ViewNextOfKin extends ListActivity implements AdapterView.OnItemCli
         listView.setOnItemClickListener(this);
 
         setListAdapter(nextOfKinAdapter);
+        pb.setVisibility(View.INVISIBLE);
     }
 
     @Override

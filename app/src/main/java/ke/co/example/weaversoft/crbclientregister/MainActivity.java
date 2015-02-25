@@ -77,7 +77,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
                 .setEndpoint(clientDetailsUtil.ENDPOINT)
                 .build();
         ClientDetailsAPI api = adapter.create(ClientDetailsAPI.class);
-
+        pb.setVisibility(View.VISIBLE);
         api.fetchClientList(new Callback<List<ClientDetails>>() {
             @Override
             public void success(List<ClientDetails> clientDetails, Response response) {
@@ -103,6 +103,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     private void reportClientFetchError() {
         Toast.makeText(this, "Error occurred while fetching data", Toast.LENGTH_LONG).show();
+        pb.setVisibility(View.INVISIBLE);
     }
 
     public void updateScreen(){
@@ -114,6 +115,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         listView.setOnItemClickListener(this);
 
         setListAdapter(clientAdapter);
+        pb.setVisibility(View.INVISIBLE);
     }
 
     @Override
